@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+  --background: #05060a;
+  --foreground: #e6eaf6;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-strong: rgba(255, 255, 255, 0.08);
+  --accent-f1: #ff2d55;
+  --accent-nascar: #ffd166;
+  --accent-lemans: #4de1ff;
+  --grid: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.08) 1px, transparent 0);
+}
+
+@theme inline {
+  --color-night: #05060a;
+  --color-dark: #0b0e16;
+  --color-ink: #0f1628;
+  --color-surface: #11192b;
+  --color-surface-2: #162138;
+  --color-surface-3: #192741;
+  --color-f1: var(--accent-f1);
+  --color-nascar: var(--accent-nascar);
+  --color-lemans: var(--accent-lemans);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 45, 85, 0.1), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(77, 225, 255, 0.08), transparent 35%),
+    linear-gradient(135deg, #04060c 0%, #050912 30%, #071122 100%);
+  min-height: 100vh;
+}
+
+.glow-edge {
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.08);
+}
+
+.glass {
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.grid-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grid);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 65%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.neon-text {
+  text-shadow: 0 0 25px rgba(255, 45, 85, 0.8), 0 0 60px rgba(77, 225, 255, 0.6);
+}
+
+.stroke-title {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.blur-blob {
+  position: absolute;
+  filter: blur(50px);
+  opacity: 0.35;
+  pointer-events: none;
+}
