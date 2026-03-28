@@ -6,12 +6,17 @@ import { Leaderboard } from "@/components/dashboard/Leaderboard";
 import { SeriesSwitcher } from "@/components/dashboard/SeriesSwitcher";
 import { TelemetryPanel } from "@/components/dashboard/TelemetryPanel";
 import { TrackMap } from "@/components/dashboard/TrackMap";
+import dynamic from "next/dynamic";
 import { useLiveRaceData } from "@/hooks/useLiveRaceData";
 import { seriesThemes } from "@/lib/mockData/series";
 import { formatLap } from "@/lib/utils/format";
 import { Series } from "@/lib/utils/types";
 import { motion } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
+import { listCars } from "@/lib/api";
+
+const heroCar = listCars()[0];
+const CarViewer = dynamic(() => import("@/components/3d/CarViewer").then((m) => m.CarViewer), { ssr: false });
 
 export default function Home() {
   const [series, setSeries] = useState<Series>("f1");
@@ -34,6 +39,26 @@ export default function Home() {
       <Hero accent={accent} seriesLabel={series.toUpperCase()} onExplore={handleScrollToDashboard} />
 
       <main ref={scrollRef} className="relative z-10 mx-auto flex max-w-6xl flex-col gap-10 px-6 pb-24 sm:px-10 lg:px-16">
+        {heroCar && (
+          <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="glass glow-edge relative overflow-hidden rounded-2xl p-6">
+              <p className="text-xs uppercase tracking-[0.4em] text-slate-400">Cinematic 3D</p>
+              <h2 className="mt-2 text-2xl font-semibold text-white">{heroCar.name}</h2>
+              <p className="mt-2 text-sm text-slate-200/80">
+                Hero stage powered by React Three Fiber. Rotate, zoom, and recolor liveries in sync with page motion.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-200">
+                {heroCar.liveries.map((color) => (
+                  <span key={color} className="h-7 w-7 rounded-full border border-white/20" style={{ background: color }} />
+                ))}
+              </div>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-2">
+              <CarViewer colors={heroCar.liveries} accent={accent} />
+            </div>
+          </section>
+        )}
+
         <SeriesSwitcher value={series} onChange={setSeries} accent={accent} />
 
         <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
