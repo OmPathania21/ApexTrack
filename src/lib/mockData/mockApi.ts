@@ -21,7 +21,7 @@ const simulateTick = (current: RaceState): RaceUpdate => {
     const pitChance = Math.random() < 0.08;
     const nextSpeed = clamp(driver.speed + speedChange, 240, 340);
     const lapGain = Math.random() > 0.7 ? 1 : 0;
-    const status = pitChance ? "pit" : "running";
+    const status: Driver["status"] = pitChance ? "pit" : "running";
     const penalty = pitChance ? randomBetween(1.5, 4) : 0;
 
     return {

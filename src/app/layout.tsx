@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   title: "ApexTrack | Motorsport Control",
   description:
     "Immersive live-style motorsport dashboard with cinematic motion and mock telemetry.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

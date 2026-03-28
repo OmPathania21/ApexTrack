@@ -59,7 +59,6 @@ export const SiteChrome = ({ children }: { children: ReactNode }) => {
       <footer className="mt-16 border-t border-white/5 bg-black/30">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-6 text-sm text-slate-400 sm:px-10 lg:px-16">
           <span>Built for immersive motorsport control.</span>
-          <span className="text-slate-500">Next.js · GSAP · Framer Motion · R3F</span>
         </div>
       </footer>
     </div>
