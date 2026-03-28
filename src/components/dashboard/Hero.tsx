@@ -13,9 +13,10 @@ interface HeroProps {
   accent: string;
   seriesLabel: string;
   onExplore: () => void;
+  backgroundImage: string;
 }
 
-export const Hero = ({ accent, seriesLabel, onExplore }: HeroProps) => {
+export const Hero = ({ accent, seriesLabel, onExplore, backgroundImage }: HeroProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const glowRef = useRef<HTMLDivElement | null>(null);
 
@@ -61,8 +62,18 @@ export const Hero = ({ accent, seriesLabel, onExplore }: HeroProps) => {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden px-6 pt-24 pb-20 sm:px-10 sm:pt-28 lg:px-16"
+      className="relative isolate min-h-screen w-full overflow-hidden px-6 pt-24 pb-20 sm:px-10 sm:pt-28 lg:px-16"
     >
+      <div className="absolute inset-0 -z-10">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            filter: "brightness(1.12) contrast(1.05)",
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f14]/80 via-[#0f141a]/85 to-[#0f141a]/95" />
+      </div>
       <div className="blur-blob left-10 top-8 h-64 w-64 rounded-full" style={{ background: accent }} />
       <div className="blur-blob right-6 top-20 h-72 w-72 rounded-full" style={{ background: "rgba(77,225,255,0.45)" }} />
 

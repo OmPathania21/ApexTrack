@@ -4,11 +4,13 @@ import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
 import { listCars, listTeams } from "@/lib/api";
 import { CarCard } from "@/components/cards/CarCard";
+import { pageBanners } from "@/lib/data/media";
 
 const CarViewer = dynamic(() => import("@/components/3d/CarViewer").then((m) => m.CarViewer), { ssr: false });
 
 const cars = listCars();
 const teams = listTeams();
+const banner = pageBanners.cars;
 
 export default function CarsPage() {
   const [selectedId, setSelectedId] = useState<string>(cars[0]?.id ?? "");
@@ -17,8 +19,13 @@ export default function CarsPage() {
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 pb-24 pt-16 sm:px-10 lg:px-16">
-      <header className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <div>
+      <header className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 shadow-lg sm:p-8">
+        <div className="absolute inset-0 opacity-60" aria-hidden>
+          <div className="absolute inset-0 scale-105 bg-cover bg-center" style={{ backgroundImage: `url(${banner})` }} />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/75 via-black/60 to-black/80" />
+        </div>
+        <div className="relative grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div>
           <p className="text-xs uppercase tracking-[0.5em] text-slate-400">Cars</p>
           <h1 className="text-4xl font-semibold text-white md:text-5xl">Interactive 3D garage.</h1>
           <p className="text-lg text-slate-200/80">
@@ -35,8 +42,9 @@ export default function CarsPage() {
               />
             ))}
           </div>
+          </div>
+          {selected && <CarViewer colors={selected.liveries} accent={team?.colors.primary ?? "#ff2d55"} />}
         </div>
-        {selected && <CarViewer colors={selected.liveries} accent={team?.colors.primary ?? "#ff2d55"} />}
       </header>
 
       <div className="grid gap-4 sm:grid-cols-2">

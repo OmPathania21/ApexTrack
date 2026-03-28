@@ -11,13 +11,14 @@ const createDrivers = (entries: Array<Pick<Driver, "id" | "name" | "team">>, bas
     delta: 0,
   }));
 
-export const seriesThemes: Record<Series, { accent: string; glow: string; track: string; laps: number; weather: string; }> = {
+export const seriesThemes: Record<Series, { accent: string; glow: string; track: string; laps: number; weather: string; heroImage: string; }> = {
   f1: {
     accent: "var(--accent-f1)",
     glow: "rgba(255,45,85,0.45)",
     track: "Monaco Street",
     laps: 78,
     weather: "Cloudy 21°C",
+    heroImage: "/dashboard-hero.jpg",
   },
   nascar: {
     accent: "var(--accent-nascar)",
@@ -25,6 +26,7 @@ export const seriesThemes: Record<Series, { accent: string; glow: string; track:
     track: "Daytona Oval",
     laps: 200,
     weather: "Sunny 28°C",
+    heroImage: "/dashboard-hero.jpg",
   },
   lemans: {
     accent: "var(--accent-lemans)",
@@ -32,6 +34,7 @@ export const seriesThemes: Record<Series, { accent: string; glow: string; track:
     track: "Circuit de la Sarthe",
     laps: 250,
     weather: "Night 18°C",
+    heroImage: "/dashboard-hero.jpg",
   },
 };
 

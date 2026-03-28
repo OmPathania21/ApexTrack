@@ -1,23 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #05060a;
-  --foreground: #e6eaf6;
-  --surface: rgba(255, 255, 255, 0.04);
-  --surface-strong: rgba(255, 255, 255, 0.08);
+  --bg-primary: #0b0f14;
+  --bg-secondary: #11161c;
+  --bg-card: #161b22;
+  --bg-elevated: #1c222b;
+  --foreground: #e6edf3;
+  --text-secondary: #9aa4af;
+  --text-muted: #6b7280;
   --accent-f1: #ff2d55;
   --accent-nascar: #ffd166;
   --accent-lemans: #4de1ff;
-  --grid: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.08) 1px, transparent 0);
+  --grid: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
 }
 
 @theme inline {
-  --color-night: #05060a;
-  --color-dark: #0b0e16;
-  --color-ink: #0f1628;
-  --color-surface: #11192b;
-  --color-surface-2: #162138;
-  --color-surface-3: #192741;
+  --color-night: #0b0f14;
+  --color-dark: #0f141a;
+  --color-ink: #11161c;
+  --color-surface: #161b22;
+  --color-surface-2: #1c222b;
+  --color-surface-3: #222a34;
   --color-f1: var(--accent-f1);
   --color-nascar: var(--accent-nascar);
   --color-lemans: var(--accent-lemans);
@@ -28,20 +31,42 @@
 body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  background: radial-gradient(circle at 20% 20%, rgba(255, 45, 85, 0.1), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(77, 225, 255, 0.08), transparent 35%),
-    linear-gradient(135deg, #04060c 0%, #050912 30%, #071122 100%);
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255, 45, 85, 0.08), transparent 40%),
+    radial-gradient(circle at 82% 8%, rgba(77, 225, 255, 0.07), transparent 35%),
+    linear-gradient(135deg, #0b0f14 0%, #0f141a 38%, #11161c 100%);
   min-height: 100vh;
 }
 
+.surface-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+  background-size: 40px 40px;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
 .glow-edge {
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 20px rgba(255, 50, 80, 0.2), 0 0 35px rgba(77, 225, 255, 0.15);
 }
 
 .glass {
-  background: linear-gradient(140deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px);
+  position: relative;
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+}
+
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.06), transparent 35%);
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .grid-overlay::after {
@@ -49,18 +74,18 @@ body {
   position: absolute;
   inset: 0;
   background-image: var(--grid);
-  background-size: 120px 120px;
-  mask-image: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 65%);
-  opacity: 0.5;
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 60%);
+  opacity: 0.55;
   pointer-events: none;
 }
 
 .neon-text {
-  text-shadow: 0 0 25px rgba(255, 45, 85, 0.8), 0 0 60px rgba(77, 225, 255, 0.6);
+  text-shadow: 0 0 20px rgba(255, 45, 85, 0.5), 0 0 45px rgba(77, 225, 255, 0.35);
 }
 
 .stroke-title {
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.25);
 }
 
 .floating {
@@ -79,7 +104,7 @@ body {
 
 .blur-blob {
   position: absolute;
-  filter: blur(50px);
-  opacity: 0.35;
+  filter: blur(60px);
+  opacity: 0.28;
   pointer-events: none;
 }
