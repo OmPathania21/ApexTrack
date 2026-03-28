@@ -27,3 +27,52 @@ export interface TelemetryPoint {
   speed: number;
   lap: number;
 }
+
+export interface DriverProfile extends Driver {
+  number: number;
+  nationality: string;
+  wins: number;
+  podiums: number;
+  poles: number;
+  bio: string;
+  helmetColor: string;
+  teamId: string;
+  image?: string;
+  highlights: Array<{ year: number; title: string; description: string }>;
+}
+
+export interface Team {
+  id: string;
+  name: string;
+  base: string;
+  championships: number;
+  drivers: string[];
+  carId: string;
+  colors: { primary: string; secondary: string };
+  description: string;
+}
+
+export interface Car {
+  id: string;
+  name: string;
+  teamId: string;
+  topSpeed: number;
+  power: number;
+  weight: number;
+  hybridSystem: string;
+  zeroToHundred: number;
+  downforce: string;
+  liveries: string[];
+  description: string;
+}
+
+export interface Article {
+  slug: string;
+  title: string;
+  category: string;
+  date: string;
+  readTime: string;
+  excerpt: string;
+  body: string[];
+  accent: string;
+}
