@@ -7,9 +7,15 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const heroBg = "/Alex%20Albon%201.png";
+const defaultHero = "/Alex%20Albon%201.png";
 
-export const DriverHero = () => {
+export const DriverHero = ({
+  backgroundImage = defaultHero,
+  firstName = "Alexander",
+  lastName = "ALBON",
+  chips = ["🇹🇭 Thailand", "Williams", "#23"],
+  teamLabel = "Williams Racing",
+}) => {
   const bgRef = useRef(null);
   const cutoutRef = useRef(null);
 
@@ -49,7 +55,7 @@ export const DriverHero = () => {
       <div ref={bgRef} className="absolute inset-0 -z-10 overflow-hidden rounded-3xl">
         <motion.div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroBg})` }}
+          style={{ backgroundImage: `url(${backgroundImage})` }}
           initial={{ scale: 1.04, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
@@ -67,7 +73,7 @@ export const DriverHero = () => {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="text-sm uppercase tracking-[0.4em] text-blue-200/80"
             >
-              Williams Racing
+              {teamLabel}
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
@@ -75,8 +81,8 @@ export const DriverHero = () => {
               transition={{ duration: 0.9, delay: 0.15 }}
               className="text-5xl font-black leading-tight sm:text-6xl"
             >
-              <span className="block font-serif italic text-4xl text-blue-100/90">Alexander</span>
-              <span className="block text-6xl sm:text-7xl">ALBON</span>
+              <span className="block font-serif italic text-4xl text-blue-100/90">{firstName}</span>
+              <span className="block text-6xl sm:text-7xl">{lastName}</span>
             </motion.h1>
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -84,9 +90,11 @@ export const DriverHero = () => {
               transition={{ duration: 0.7, delay: 0.25 }}
               className="flex flex-wrap gap-3 text-sm text-blue-100/85"
             >
-              <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1">🇹🇭 Thailand</span>
-              <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1">Williams</span>
-              <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1">#23</span>
+              {chips.map((chip) => (
+                <span key={chip} className="rounded-full border border-white/15 bg-white/10 px-3 py-1">
+                  {chip}
+                </span>
+              ))}
             </motion.div>
           </div>
           <motion.p
@@ -102,8 +110,8 @@ export const DriverHero = () => {
         <div className="relative flex justify-end">
           <motion.img
             ref={cutoutRef}
-            src={heroBg}
-            alt="Alexander Albon"
+            src={backgroundImage}
+            alt={`${firstName} ${lastName}`}
             className="relative z-10 h-[480px] w-auto object-contain drop-shadow-[0_25px_55px_rgba(52,120,246,0.55)]"
             initial={{ opacity: 0, x: 40, scale: 1.02 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
