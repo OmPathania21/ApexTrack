@@ -76,7 +76,7 @@ export const TelemetryPanel = ({ drivers, lap, totalLaps, accent, timestamp }: T
               />
               <Tooltip
                 contentStyle={{ background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.1)", color: "white" }}
-                formatter={(value?: number | string) => `${Math.round(Number(value ?? 0))} km/h`}
+                formatter={(value: any) => `${Math.round(Number(Array.isArray(value) ? value[0] : value ?? 0))} km/h`}
                 labelFormatter={(ts) => `Δ ${ts}s`}
               />
               <Area type="monotone" dataKey="speed" stroke={accent} fill="url(#speedGradient)" strokeWidth={2} />
