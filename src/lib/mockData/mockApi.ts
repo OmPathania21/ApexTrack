@@ -1,4 +1,5 @@
 import { clamp } from "@/lib/utils/format";
+import type { Driver } from "@/lib/utils/types";
 import { RaceState, Series } from "@/lib/utils/types";
 import { initialRaceState } from "./series";
 
